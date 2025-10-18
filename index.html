@@ -488,17 +488,17 @@
 
     // parse response
     function parseResponse(json){
-      if(!json) return '🚫 Empty response';
+      if(!json) return '🚫 Result မရှိပါ';
       if (json.error === true || json.success === false || json.msg === 'id_not_found') {
-        return '❌ ID not found or error.';
+        return '❌ ID မှားနေပါတယ်။ ဒါမှမဟုတ် error.';
       }
       const d = json.data || {};
       let lines = [];
-      lines.push('✔️ Account found');
+      lines.push('✔️ Account တွေ့ပါပြီ');
       if(d.username) lines.push(`Username: ${d.username}`);
       if(d.id) lines.push(`ID: ${d.id}`);
       if(d.server || d.server_name || d.server_id) lines.push(`Server: ${d.server || d.server_name || d.server_id}`);
-      if('is_ban' in d) lines.push(`Banned: ${d.is_ban ? 'Yes' : 'No'}`);
+      if('is_ban' in d) lines.push(`Banned: ${d.is_ban ? '🥹Banခံထားရပါတယ်' : '🥳မBanခံထားရပါ'}`);
       if(d.region) lines.push(`Region: ${d.region}`);
       // example: shop events summary (if present)
       if(Array.isArray(d.shop_events) && d.shop_events.length){
@@ -613,7 +613,7 @@
         showResult(parseResponse(json));
       } catch(e){
         hideLoading();
-        showResult('🚫 Server error, please try again.');
+        showResult('🚫 Server error, ထပ်မံကြိုးစားကြည့်ပါ မရပါက vpn ခံပေးပါ.');
         console.error(e);
       }
     }
